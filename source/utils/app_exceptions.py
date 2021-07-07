@@ -23,6 +23,11 @@ async def app_exception_handler(request: Request, exc: AppExceptionType):
 
 
 class AppException:
+    class DatabaseConnectionException(AppExceptionType):
+        def __init__(self, description: str = 'Application failed to connect to database.'):
+            status_code = 500
+            super().__init__(status_code, description)
+
     class UserAlreadyExistException(AppExceptionType):
         def __init__(self, description: str = 'This user already exists.'):
             status_code = 400
